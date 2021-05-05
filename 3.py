@@ -2,6 +2,7 @@
 month = 0
 while True:
     if month not in range(1, 13):
+        print('*' * 40)
         month = int(input(f"Введите месяц цифрой от 1 до 12: "))
         continue
     # Список
@@ -13,7 +14,7 @@ while True:
     # Словарь
     dict_calend = {"Зима": [1, 2, 12], "Весна": [3, 4, 5], "Лето": [6, 7, 8], "Осень": [9, 10, 11]}
     for i in range(4):
+        # Выдёргиваем ключ-значение и проверям содержимое значения
         dk, dv = dict_calend.popitem()
         print(f"Время года по месяцу №{month} из словаря: {dk}") if month in dv else None
-
     month = 0
