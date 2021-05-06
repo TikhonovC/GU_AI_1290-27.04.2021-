@@ -8,5 +8,4 @@ for i, v in enumerate(spis):
     # Т.о. решается и проблема последнего элемента
     if i % 2 > 0:
         spis[i], spis[i-1] = spis[i-1], spis[i]
-        i = i + 2
 print(f"Выходной список: {spis}")
