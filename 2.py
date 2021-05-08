@@ -1,6 +1,6 @@
 # Задание 2
 def personal_data(fname, lname, bdate, city, email, phone):
-    """ Метод реализует процедуру получения и склеивания персональных данных
+    """ Функция реализует процедуру получения и склеивания персональных данных
     """
     try:
         fname, lname, bdate, city, email, phone = str(fname), str(lname), str(bdate), str(city), str(email), str(phone)
