@@ -6,4 +6,3 @@ my_list = [randint(0, 100) for i in range(10)]
 new_list = [val for k, val in enumerate(my_list) if k > 0 and val > my_list[k-1]]
 print(f"Исходный список: {my_list}")
 print(f"Новый список: {new_list}")
-

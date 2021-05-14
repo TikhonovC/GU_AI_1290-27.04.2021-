@@ -1,11 +1,12 @@
 # Задание 7
 from math import factorial
+
 def fact(number):
-    for i in range(1, number+1):
-        yield f"{i}! = {factorial(i)}"
-
-
-
+    try:
+        for i in range(1, number+1):
+            yield f"{i}! = {factorial(i)}"
+    except:
+        return None
 
 # Предложение ввода числа
 while True:
