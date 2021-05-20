@@ -38,5 +38,3 @@ pencil.draw()
 
 handle = Handle('разметку')
 handle.draw()
-
-
