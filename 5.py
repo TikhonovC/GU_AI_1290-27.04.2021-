@@ -1,6 +1,6 @@
 # Задание 5
 class Stationery:
-    """Класс автомобиля"""
+    """Класс отрисовки"""
     def __init__(self, title="Название"):
         self.title = title
 
@@ -9,19 +9,19 @@ class Stationery:
         print(f"Запуск отрисовки '{self.title}'")
 
 
-
-
 class Pen(Stationery):
     """Класс ручки"""
     def draw(self):
         """Метод отрисовки"""
         print(f"Запуск отрисовки '{self.title}' ручкой")
 
+
 class Pencil(Stationery):
     """Класс карандаша"""
     def draw(self):
         """Метод отрисовки"""
         print(f"Запуск отрисовки '{self.title}' карандашом")
+
 
 class Handle(Stationery):
     """Класс маркера"""

@@ -13,13 +13,14 @@ class Car:
         print(f"Автомобиль '{self.name}' начал движение")
 
     def stop(self):
-        print(f"Автомобиль '{self.name}' начал остановился")
+        print(f"Автомобиль '{self.name}' остановился")
 
     def turn(self, direction):
         print(f"Автомобиль '{self.name}' повернулся на{direction}")
 
     def show_speed(self):
         print(f"Скорость автомобиля '{self.name}': {self.speed} км/ч")
+
 
 class TownCar(Car):
     """Городской автомобиль"""
@@ -29,9 +30,11 @@ class TownCar(Car):
         else:
             print(f"Скорость автомобиля '{self.name}': {self.speed} км/ч")
 
+
 class SportCar(Car):
     """Спортивный автомобиль"""
     pass
+
 
 class WorkCar(Car):
     """Рабочий автомобиль"""
@@ -41,15 +44,15 @@ class WorkCar(Car):
         else:
             print(f"Скорость автомобиля '{self.name}': {self.speed} км/ч")
 
+
 class PoliceCar(Car):
     """Мусорской автомобиль"""
     def __init__(self, speed, color, name, is_police=1):
         super().__init__(speed, color, name, is_police)
 
 
-
 print("*" * 50)
-car1 = TownCar(name="Городской", color="Красный", speed=60)
+car1 = TownCar(name="Городской", color="Красный", speed=70)
 car1.go()
 car1.turn("лево")
 car1.show_speed()
@@ -63,7 +66,7 @@ car2.show_speed()
 car2.stop()
 
 print("*" * 50)
-car3 = WorkCar(name="Рабочий", color="Жёлтый", speed=80)
+car3 = WorkCar(name="Рабочий", color="Жёлтый", speed=50)
 car3.go()
 car3.turn("прямо")
 car3.show_speed()

@@ -5,11 +5,13 @@ from random import randint
 
 
 class TrafficLight:
-    __color = {"Красный": 7, "Жёлтый": 2, "Зелёный": randint(1, 3)}
+    """Класс светофора"""
+    __color = {"Красный": 7, "Жёлтый": 2, "Зелёный": randint(1, 3), "*" * 50: 0}
 
     def running(self):
+        """Метод переключения световора"""
         for color in cycle(self.__color):
-            print(color + f" (задержка: {self.__color[color]})")
+            print(color + (f" (задержка: {self.__color[color]})" if self.__color[color] > 0 else ''))
             time.sleep(self.__color[color])
 
 
