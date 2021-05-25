@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 
 class Odezhda(ABC):
-    """ Ролительский класс ля одежды - суммирует и форматирует результат"""
+    """ Родительский класс ля одежды - суммирует и форматирует результат"""
     def __init__(self, name):
         self.name = name
         self.result = 0
@@ -11,6 +11,7 @@ class Odezhda(ABC):
     @property
     @abstractmethod
     def calculate(self):
+        """Пустой класс для переопределения"""
         pass
 
     def __add__(self, other):

@@ -9,9 +9,9 @@ class Matrix:
         self.listing = listing
 
     def __str__(self):
-        # Транспортиование матрицы
+        """Транспортиование матрицы"""
         transp = [list(row) for row in zip(*self.listing)]
-        # Раскрытие каждой строки списка с довавлением перевода на следующую строку
+        # Раскрытие каждой строки списка с добавлением перевода на следующую строку
         a = [' '.join(map(str, ii))+"\n" for i, ii in enumerate(transp)]
         return ''.join(map(str, a))
 
