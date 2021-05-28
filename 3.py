@@ -13,7 +13,7 @@ def num_checker(value):
 num_array = []
 while True:
     try:
-        inp_data = input("Введите число: ")
+        inp_data = input("Введите число (для выхода введите: stop): ")
         if inp_data == "stop":
             raise KeyboardInterrupt
         num_array.append(num_checker(inp_data))
@@ -22,4 +22,5 @@ while True:
         print(exception)
 
     except KeyboardInterrupt:
-        print(f"***************\nСформированный список: {num_array}")
+        print(f"{'*' * 50}\nСформированный список: {num_array}")
+        break

@@ -1,7 +1,7 @@
 # Задание 7
 class Compl(object):
     """Класс для работы с комплексными числами"""
-    def __init__(self, real, mnim):
+    def __init__(self, real=1, mnim=1):
         self.real = float(real)
         self.mnim = float(mnim)
 
@@ -23,11 +23,11 @@ class Compl(object):
 
 ####################################################
 """Операции над комплексными числами"""
-a = Compl(1, -2)
-print("a =", a)
+a = Compl(1, 2)
+b = Compl(3, -4)
 
-b = Compl(3, 4)
-print("b =", b)
+print(f"a = {a}")
+print(f"b = {b}")
 
-print("a + b = ", a + b)
-print("a * b = ", a * b)
+print(f"a + b = {a + b}")
+print(f"a * b = {a * b}")
