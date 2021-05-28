@@ -1,80 +1,130 @@
-# Задание 4
-class Car:
-    """Класс автомобиля"""
-    def __init__(self, speed, color, name, is_police=0):
-        self.speed = speed
-        self.color = color
-        self.name = name
-        self.is_police = bool(is_police)
-        print(f"Инициализирован автомобиль (Имя: '{name}', Цвет: '{color}', Скорость: '{speed}'"
-              f"{', Мусорской' if self.is_police else ''})")
+# Задание 4-6
+class Sklad(object):
+    """Класс Склад оргтехники"""
+    def __init__(self):
+        """Инициализация склада"""
+        self.dic_items = {}
 
-    def go(self):
-        print(f"Автомобиль '{self.name}' начал движение")
+    def add_item(self, add_items_dict):
+        """Добавление на склад"""
+        # Проверка словаря
+        self.check_dict(add_items_dict)
+        # Для каждой позиции проверка, что есть и добавление в переменные
+        for i, v in add_items_dict.items():
+            if i in self.dic_items:
+                self.dic_items[i] += v
+            else:
+                self.dic_items[i] = v
+        print(f"На склад успешно добавлены: {str(add_items_dict)}")
 
-    def stop(self):
-        print(f"Автомобиль '{self.name}' остановился")
+    def get_item(self, get_items_dict):
+        """Перемещение со склада"""
+        # Проверка словаря
+        self.check_dict(get_items_dict)
+        print(f"Перемещение со склада: {get_items_dict}")
+        for i, v in enumerate(get_items_dict):
+            if v in self.dic_items:
+                if self.dic_items[v] < int(get_items_dict[v]):
+                    raise MyExcept(f"Недостаточно '{v}': '{self.dic_items[v]}', а всего '{get_items_dict[v]}'")
+                else:
+                    self.dic_items[v] -= get_items_dict[v]
+            else:
+                raise MyExcept(f"Нет запрашиваемой техники: {str(BasOrg(v).name)}")
 
-    def turn(self, direction):
-        print(f"Автомобиль '{self.name}' повернулся на{direction}")
+    def __str__(self):
+        """Статистика по складу"""
+        return (f"На складе: {str(self.dic_items)}")
 
-    def show_speed(self):
-        print(f"Скорость автомобиля '{self.name}': {self.speed} км/ч")
-
-
-class TownCar(Car):
-    """Городской автомобиль"""
-    def show_speed(self):
-        if self.speed > 60:
-            print(f"Внимание городской автомобиль превысил разрешённую скорость в 60 км/ч: {self.speed} км/ч")
-        else:
-            print(f"Скорость автомобиля '{self.name}': {self.speed} км/ч")
-
-
-class SportCar(Car):
-    """Спортивный автомобиль"""
-    pass
-
-
-class WorkCar(Car):
-    """Рабочий автомобиль"""
-    def show_speed(self):
-        if self.speed > 40:
-            print(f"Внимание рабочий автомобиль превысил разрешённую скорость в 40 км/ч: {self.speed} км/ч")
-        else:
-            print(f"Скорость автомобиля '{self.name}': {self.speed} км/ч")
-
-
-class PoliceCar(Car):
-    """Мусорской автомобиль"""
-    def __init__(self, speed, color, name, is_police=1):
-        super().__init__(speed, color, name, is_police)
+    @staticmethod
+    def check_dict(inp):
+        """Проверяет валидность востушившего словаря с техникой"""
+        if inp is None or len(inp) < 1:
+            raise MyExcept(f"Передан пустой словарь: '{str(inp)}'")
+        for i in inp:
+            if inp[i] is None or type(inp[i]) != int or int(inp[i]) < 1:
+                raise MyExcept(f"Ошибка во входящем словаре: '{str(i)}: {str(inp[i])}'")
 
 
-print("*" * 50)
-car1 = TownCar(name="Городской", color="Красный", speed=70)
-car1.go()
-car1.turn("лево")
-car1.show_speed()
-car1.stop()
-print("*" * 50)
+###########################################################################
+class BasOrg(object):
+    """Базовый класс для оргтехники"""
+    def __init__(self, name):
+        self.name = str(name)
 
-car2 = SportCar(name="Спорт", color="Зелёный", speed=70)
-car2.go()
-car2.turn("право")
-car2.show_speed()
-car2.stop()
 
-print("*" * 50)
-car3 = WorkCar(name="Рабочий", color="Жёлтый", speed=50)
-car3.go()
-car3.turn("прямо")
-car3.show_speed()
-car3.stop()
+class Printer(BasOrg):
+    """Дочерний класс для Принтера"""
+    def __init__(self):
+        return super().__init__("Принтер")
 
-print("*" * 50)
-car4 = PoliceCar(name="Мусора", color="Жёлтый", speed=80)
-car4.go()
-car4.turn("зад")
-car4.show_speed()
-car4.stop()
+
+class Scanner(BasOrg):
+    """Дочерний класс для Сканера"""
+    def __init__(self):
+        return super().__init__("Сканер")
+
+
+class Xerox(BasOrg):
+    """Дочерний класс для Ксерокса"""
+    def __init__(self):
+        return super().__init__("Ксерокс")
+
+
+class MyExcept(Exception):
+    """Кастомное исключение"""
+    def __init__(self, text):
+        self.text = str(text)
+
+    def __str__(self):
+        return f"*** {self.text} ***"
+
+
+
+#############################################################################
+""" Перемещение техники по шагам"""
+sklad = Sklad()
+try:
+    print("\n--- Добавление оргтехники на склад ---")
+    add_items_dict = {Printer().name: 10, Scanner().name: 11, Xerox().name: 12}
+    sklad.add_item(add_items_dict)
+    print(sklad)
+except MyExcept as exception:
+    print(exception)
+
+try:
+    print("\n--- Перемещение со склада ---")
+    get_items_dict = {Printer().name: 1, Scanner().name: 3, Xerox().name: 5}
+    sklad.get_item(get_items_dict)
+    print(sklad)
+except MyExcept as exception:
+    print(exception)
+
+try:
+    print("\n--- Перемещение со склада (Прогнозируемая ошибка)---")
+    get_items_dict = {Printer().name: 100, Scanner().name: 3, Xerox().name: 5}
+    sklad.get_item(get_items_dict)
+    print(sklad)
+except MyExcept as exception:
+    print(exception)
+finally:
+    print(sklad)
+
+try:
+    print("\n--- Добавление оргтехники на склад (Прогнозируемая ошибка) ---")
+    add_items_dict = {Printer().name: 0, Scanner().name: 8, Xerox().name: 7}
+    sklad.add_item(add_items_dict)
+    print(sklad)
+except MyExcept as exception:
+    print(exception)
+finally:
+    print(sklad)
+
+try:
+    print("\n--- Перемещение со склада (Прогнозируемая ошибка) ---")
+    get_items_dict = {Printer().name: 0, Scanner().name: 4, Xerox().name: 3}
+    sklad.get_item(get_items_dict)
+    print(sklad)
+except MyExcept as exception:
+    print(exception)
+finally:
+    print(sklad)

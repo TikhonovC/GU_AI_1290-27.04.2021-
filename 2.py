@@ -1,16 +1,17 @@
 # Задание 2
-class Road:
-    """Класс расчёта массы асфальта"""
-    def __init__(self, length, width):
-        self._length = length
-        self._width = width
+class MyExcept(Exception):
+    pass
 
-    def massa(self, mass1, height):
-        mess = f"Длина: {self._length} м.\nШирина: { self._width} м.\nМасса 1кв.м.: {mass1} кг.\nВысота: {height} см.\n"
-        print(mess)
-        mass = self._length * self._width * mass1 * height
-        return mass
+inp_data = input("Введите положительное число: ")
 
+try:
+    if inp_data == '0':
+         raise MyExcept("Нельзя делить на 0")
+    result = 1 / int(inp_data)
 
-rc = Road(20, 5000)
-print(rc.massa(25, 5))
+except ValueError:
+    print("Вы ввели не число")
+except MyExcept as err:
+    print(f"*** {err} ***")
+else:
+    print(f"Вычисление успешно: {result}")

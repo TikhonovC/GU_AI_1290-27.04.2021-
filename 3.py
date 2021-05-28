@@ -1,23 +1,25 @@
 # Задание 3
-class Worker:
-    """Класс работника с его характеристиками """
-    def __init__(self, name, surname, position, wage, bonus):
-        self.name = name
-        self.surname = surname
-        self.position = position
-        self._income = {"wage": wage, "bonus": bonus}
+class MyExcept(Exception):
+    pass
 
 
-class Position(Worker):
-    """Класс для должности работника"""
-    def get_full_name(self):
-        full_name = f"{self.name} {self.surname}"
-        return full_name
-
-    def get_total_income(self):
-        total_income = sum(self._income.values())
-        return total_income
+def num_checker(value):
+    try:
+        return float(value)
+    except ValueError:
+        raise MyExcept(f"Введено не число: '{value}'")
 
 
-pos = Position(name="Sergei", surname="Tikhonov", position="dev", wage=30, bonus=3)
-print(f"Имя: {pos.get_full_name()},\nДолжность: {pos.position},\nЗП: {pos.get_total_income()}")
+num_array = []
+while True:
+    try:
+        inp_data = input("Введите число: ")
+        if inp_data == "stop":
+            raise KeyboardInterrupt
+        num_array.append(num_checker(inp_data))
+
+    except MyExcept as exception:
+        print(exception)
+
+    except KeyboardInterrupt:
+        print(f"***************\nСформированный список: {num_array}")
